@@ -208,5 +208,68 @@ namespace AddressBookDatabaseWithADO
                 this.connection.Close();
             }
         }
+
+        public void SortPersonNameByCity()
+        {
+            try
+            {
+                AddressBookModel model = new AddressBookModel();
+                using (this.connection)
+                {
+                    using (SqlCommand command = new SqlCommand(
+                        @"SELECT * FROM address_book WHERE city = 'Pune' order by first_name; 
+                        SELECT * FROM address_book WHERE city = 'Satara' order by first_name, last_name;", connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            Console.WriteLine("------Sorted Contact based of first name of person belonging to city Pune-----");
+                            while (reader.Read())
+                            {
+                                model.first_name = reader.GetString(0);
+                                model.last_name = reader.GetString(1);
+                                model.address = reader.GetString(2);
+                                model.city = reader.GetString(3);
+                                model.state = reader.GetString(4);
+                                model.zip = reader.GetInt32(5);
+                                model.phone_number = reader.GetString(6);
+                                model.email = reader.GetString(7);
+
+                                Console.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", model.first_name, model.last_name, model.address, model.city,
+                                    model.state, model.zip, model.phone_number, model.email);
+                                Console.WriteLine("\n");
+                            }
+                            if (reader.NextResult())
+                            {
+                                Console.WriteLine("------Sorted Contact based of first name of person belonging to city Satara-----");
+                                while (reader.Read())
+                                {
+                                    model.first_name = reader.GetString(0);
+                                    model.last_name = reader.GetString(1);
+                                    model.address = reader.GetString(2);
+                                    model.city = reader.GetString(3);
+                                    model.state = reader.GetString(4);
+                                    model.zip = reader.GetInt32(5);
+                                    model.phone_number = reader.GetString(6);
+                                    model.email = reader.GetString(7);
+
+                                    Console.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", model.first_name, model.last_name, model.address, model.city,
+                                        model.state, model.zip, model.phone_number, model.email);
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
     }
 }

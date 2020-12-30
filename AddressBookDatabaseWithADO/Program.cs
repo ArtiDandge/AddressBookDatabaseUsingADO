@@ -7,6 +7,7 @@ namespace AddressBookDatabaseWithADO
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Address Book Database Project with ADO.NET");
+            Console.WriteLine("\n");
             AddressBookRepo repo = new AddressBookRepo();
             //repo.CheckConnection();
             AddressBookModel addressBookModel = new AddressBookModel();
@@ -38,8 +39,8 @@ namespace AddressBookDatabaseWithADO
             //repo.DeleteContactUsingName(model);
 
             //repo.RetrievePersonFromPErticulatCityOrState();
-            repo.AddressBookSizeByCityANDState();
-
+            //repo.AddressBookSizeByCityANDState();
+            repo.SortPersonNameByCity();
         }
     }
 }
