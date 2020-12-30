@@ -21,8 +21,18 @@ namespace AddressBookDatabaseWithADO
             addressBookModel.email = "mamta1234@gmail.com";
             addressBookModel.addressbook_name = "AddressBook2";
             addressBookModel.addressbook_type = "Friends";
+            //repo.AddContact(addressBookModel);
 
-            repo.AddContact(addressBookModel);
+            AddressBookModel addressBookModel1 = new AddressBookModel();
+            addressBookModel1.first_name = "Neha";
+            addressBookModel1.last_name = "Patil";
+            addressBookModel1.city = "Pushkar";
+            addressBookModel1.state = "Rajasthan";
+            addressBookModel1.email = "patil123@gmail.com";
+            addressBookModel1.addressbook_name = "AddressBook1";
+            addressBookModel1.addressbook_type = "Professional";
+            repo.EditContactUsingPersonName(addressBookModel1);
+
         }
     }
 }
