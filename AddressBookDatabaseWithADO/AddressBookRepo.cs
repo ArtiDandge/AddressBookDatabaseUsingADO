@@ -105,5 +105,66 @@ namespace AddressBookDatabaseWithADO
                 this.connection.Close();
             }
         }
+
+        public void RetrievePersonFromPErticulatCityOrState()
+        {
+            try
+            {
+                AddressBookModel model = new AddressBookModel();
+                using (this.connection)
+                {
+                    using (SqlCommand command = new SqlCommand(
+                        @"SELECT * FROM address_book WHERE city = 'Pune' OR state = 'Maharashtra';
+                        SELECT * FROM address_book WHERE city = 'Jodhpur' OR state = 'Rajasthan'; ", connection))
+                    {
+                        connection.Open();
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                model.first_name = reader.GetString(0);
+                                model.last_name = reader.GetString(1);
+                                model.address = reader.GetString(2);
+                                model.city = reader.GetString(3);
+                                model.state = reader.GetString(4);
+                                model.zip = reader.GetInt32(5);
+                                model.phone_number = reader.GetString(6);
+                                model.email = reader.GetString(7);
+
+                                Console.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", model.first_name, model.last_name, model.address, model.city,
+                                    model.state, model.zip, model.phone_number, model.email);
+                                Console.WriteLine("\n");
+                            }
+                            if (reader.NextResult())
+                            {
+                                while (reader.Read())
+                                {
+                                    model.first_name = reader.GetString(0);
+                                    model.last_name = reader.GetString(1);
+                                    model.address = reader.GetString(2);
+                                    model.city = reader.GetString(3);
+                                    model.state = reader.GetString(4);
+                                    model.zip = reader.GetInt32(5);
+                                    model.phone_number = reader.GetString(6);
+                                    model.email = reader.GetString(7);
+
+                                    Console.WriteLine("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}", model.first_name, model.last_name, model.address, model.city,
+                                        model.state, model.zip, model.phone_number, model.email);
+                                    Console.WriteLine("\n");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
     }
 }
