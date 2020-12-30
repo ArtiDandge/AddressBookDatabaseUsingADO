@@ -40,7 +40,8 @@ namespace AddressBookDatabaseWithADO
 
             //repo.RetrievePersonFromPErticulatCityOrState();
             //repo.AddressBookSizeByCityANDState();
-            repo.SortPersonNameByCity();
+            //repo.SortPersonNameByCity();
+            repo.GetNumberOfPersonsCountByType();
         }
     }
 }
