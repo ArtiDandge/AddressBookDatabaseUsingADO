@@ -41,7 +41,34 @@ namespace AddressBookDatabaseWithADO
             //repo.RetrievePersonFromPErticulatCityOrState();
             //repo.AddressBookSizeByCityANDState();
             //repo.SortPersonNameByCity();
-            repo.GetNumberOfPersonsCountByType();
+            //repo.GetNumberOfPersonsCountByType();
+
+            AddressBookModel addressBookModel2 = new AddressBookModel();
+            addressBookModel2.first_name = "Megha";
+            addressBookModel2.last_name = "Chinchawade";
+            addressBookModel2.address = "Rajmata chauk";
+            addressBookModel2.city = "Indor";
+            addressBookModel2.state = "Indor";
+            addressBookModel2.zip = 422233;
+            addressBookModel2.phone_number = "6754321095";
+            addressBookModel2.email = "megha4@gmail.com";
+            addressBookModel2.addressbook_name = "AddressBook3";
+            addressBookModel2.addressbook_type = "Family";
+            //repo.AddAPersonInTwoAddressbookTypes(addressBookModel2);
+
+            //Adding Same Person's COntact in AddressBook Type 'Friends'
+            addressBookModel2.first_name = "Megha";
+            addressBookModel2.last_name = "Chinchawade";
+            addressBookModel2.address = "Rajmata chauk";
+            addressBookModel2.city = "Indor";
+            addressBookModel2.state = "Indor";
+            addressBookModel2.zip = 422233;
+            addressBookModel2.phone_number = "6754321095";
+            addressBookModel2.email = "megha4@gmail.com";
+            addressBookModel2.addressbook_name = "AddressBook2";
+            addressBookModel2.addressbook_type = "Friends";
+            repo.AddAPersonInTwoAddressbookTypes(addressBookModel2);
+
         }
     }
 }

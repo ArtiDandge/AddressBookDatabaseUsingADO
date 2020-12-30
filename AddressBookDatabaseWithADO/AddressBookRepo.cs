@@ -313,5 +313,68 @@ namespace AddressBookDatabaseWithADO
                 this.connection.Close();
             }
         }
+
+        public bool AddAPersonInTwoAddressbookTypes(AddressBookModel model)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    //Query to add persone in Family Addressbook type
+                    SqlCommand command = new SqlCommand("SpAddContactInAddressBook", this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@first_name", model.first_name);
+                    command.Parameters.AddWithValue("@last_name", model.last_name);
+                    command.Parameters.AddWithValue("@address", model.address);
+                    command.Parameters.AddWithValue("@city", model.city);
+                    command.Parameters.AddWithValue("@state", model.state);
+                    command.Parameters.AddWithValue("@zip", model.zip);
+                    command.Parameters.AddWithValue("@phone_number", model.phone_number);
+                    command.Parameters.AddWithValue("@email", model.email);
+                    command.Parameters.AddWithValue("@addressbook_name", model.addressbook_name);
+                    command.Parameters.AddWithValue("@addressbook_type", model.addressbook_type);
+                    this.connection.Open();
+                    var result = command.ExecuteNonQuery();
+                    Console.WriteLine("New Contact Added Successfully");
+                    this.connection.Close();
+                    if (result != 0)
+                    {
+                        return true;
+                    }
+
+                    //Query to add persone in Friends Addressbook type
+                    SqlCommand command2 = new SqlCommand("SpAddContactInAddressBook", this.connection);
+                    command2.CommandType = CommandType.StoredProcedure;
+                    command2.Parameters.AddWithValue("@first_name", model.first_name);
+                    command2.Parameters.AddWithValue("@last_name", model.last_name);
+                    command2.Parameters.AddWithValue("@address", model.address);
+                    command2.Parameters.AddWithValue("@city", model.city);
+                    command2.Parameters.AddWithValue("@state", model.state);
+                    command2.Parameters.AddWithValue("@zip", model.zip);
+                    command2.Parameters.AddWithValue("@phone_number", model.phone_number);
+                    command2.Parameters.AddWithValue("@email", model.email);
+                    command2.Parameters.AddWithValue("@addressbook_name", model.addressbook_name);
+                    command2.Parameters.AddWithValue("@addressbook_type", model.addressbook_type);
+                    this.connection.Open();
+                    var result2 = command2.ExecuteNonQuery();
+                    Console.WriteLine("New Contact Added Successfully");
+                    this.connection.Close();
+                    if (result2 != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
+
     }
 }
