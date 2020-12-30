@@ -37,7 +37,8 @@ namespace AddressBookDatabaseWithADO
             model.first_name = "Komal";
             //repo.DeleteContactUsingName(model);
 
-            repo.RetrievePersonFromPErticulatCityOrState();
+            //repo.RetrievePersonFromPErticulatCityOrState();
+            repo.AddressBookSizeByCityANDState();
 
         }
     }
