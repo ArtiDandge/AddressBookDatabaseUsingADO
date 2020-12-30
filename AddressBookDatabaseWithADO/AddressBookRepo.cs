@@ -67,8 +67,33 @@ namespace AddressBookDatabaseWithADO
 
                     connection.Open();
                     command.ExecuteNonQuery();
-                    Console.WriteLine("Entry Updated successfully");
+                    Console.WriteLine("Contact Updated successfully");
                     this.connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
+
+        public void DeleteContactUsingName(AddressBookModel model)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand command = new SqlCommand("SpDeleteContactBasedOnName", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@first_name", model.first_name);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    Console.WriteLine("Contact Deleted successfully");
+                    connection.Close();
                 }
             }
             catch (Exception e)
